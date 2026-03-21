@@ -1,0 +1,188 @@
+/* ─── Correctif : body propre sans gradient coloré ──────────────────────────
+   Remplacer le radial-gradient vert/gris par un fond blanc pur.
+   Le gradient précédent (#f4f7f5 → #eef3f0) donnait une teinte
+   "poussiéreuse" à toute la page et interférait avec les couleurs de la map.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --pm-bg: #f4f7f5;
+  --pm-surface: #ffffff;
+  --pm-surface-muted: #f0f4f2;
+  --pm-border: #dfe7e3;
+  --pm-text: #1b2a24;
+  --pm-muted: #5f726a;
+  --pm-primary: #0a7c5c;
+  --pm-primary-strong: #096a4f;
+  --pm-primary-soft: #dff3ed;
+  --pm-accent: #02c39a;
+  --pm-shadow: 0 12px 30px rgba(13, 59, 46, 0.08);
+  --pm-radius: 14px;
+}
+
+body {
+  /* AVANT : background: radial-gradient(circle at top left, #ffffff 0%, #f4f7f5 55%, #eef3f0 100%); */
+  /* APRÈS : fond blanc pur — les verts viennent des composants, pas du body */
+  background: #ffffff;
+  color: var(--pm-text);
+  font-family: "Alegreya Sans", "Trebuchet MS", sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #0d3b2e;
+  letter-spacing: -0.02em;
+}
+
+.container,
+.container-fluid,
+.container-lg,
+.container-xl,
+.container-xxl {
+  color: var(--pm-text);
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  color: var(--pm-muted);
+  margin-bottom: 0;
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-bottom: 1px solid var(--pm-border) !important;
+  backdrop-filter: blur(8px);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #22352e !important;
+  font-weight: 600;
+}
+
+.navbar .nav-link.router-link-active {
+  color: var(--pm-primary) !important;
+}
+
+.card {
+  border: 1px solid var(--pm-border);
+  background: var(--pm-surface);
+  border-radius: var(--pm-radius);
+  box-shadow: var(--pm-shadow);
+}
+
+.card-header {
+  background: var(--pm-surface);
+  border-bottom: 1px solid var(--pm-border);
+  font-weight: 600;
+}
+
+.list-group-item {
+  border-color: var(--pm-border);
+  background: var(--pm-surface);
+  color: var(--pm-text);
+}
+
+.list-group-item-action:hover {
+  background: var(--pm-surface-muted);
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+  border-color: var(--pm-border);
+  background: #ffffff;
+  color: var(--pm-text);
+  border-radius: 10px;
+}
+
+.form-control::placeholder {
+  color: #9aa9a1;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--pm-primary);
+  box-shadow: 0 0 0 0.2rem rgba(10, 124, 92, 0.15);
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  border-color: var(--pm-primary);
+  background: var(--pm-primary);
+  box-shadow: 0 8px 16px rgba(10, 124, 92, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--pm-primary-strong);
+  border-color: var(--pm-primary-strong);
+}
+
+.btn-outline-primary {
+  border-color: var(--pm-primary);
+  color: var(--pm-primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--pm-primary-soft);
+  color: var(--pm-primary);
+}
+
+.btn-outline-secondary {
+  border-color: #c7d3ce;
+  color: #50665c;
+}
+
+.btn-outline-secondary:hover {
+  background: #eef4f1;
+}
+
+.text-muted,
+.small.text-muted {
+  color: var(--pm-muted) !important;
+}
+
+.alert {
+  border-radius: 12px;
+  border: 1px solid var(--pm-border);
+  box-shadow: var(--pm-shadow);
+}
+
+.kpi-card {
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f7fbf9);
+}
+
+.kpi-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #0d3b2e;
+}
+
+.modal-content {
+  border-radius: 16px;
+  border: 1px solid var(--pm-border);
+  box-shadow: 0 20px 40px rgba(13, 59, 46, 0.15);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.35rem;
+  }
+}

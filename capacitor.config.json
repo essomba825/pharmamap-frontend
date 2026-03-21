@@ -1,0 +1,9 @@
+{
+  "appId": "com.pharmamap.app",
+  "appName": "PharmaMap",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

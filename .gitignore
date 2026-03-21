@@ -1,0 +1,64 @@
+# See https://github.com/github/gitignore/blob/main/Node.gitignore
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+/coverage
+/coverage.json
+/jest.config.js
+/jest.config.ts
+/cypress
+/cypress.config.js
+/cypress.config.ts
+
+# Production
+/build
+/dist
+/next
+/.next
+/out
+/packages/*/dist
+/packages/*/.next
+
+# Environment variables
+
+
+# Next.js
+/.next/cache
+/.next/standalone
+/.next/server
+
+# Vercel
+.vercel
+.output
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Images (if large, but keep public/)
+# /public/arriere-plan*.jpg  # uncomment if want exclude
+.env
