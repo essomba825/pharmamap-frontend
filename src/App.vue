@@ -30,9 +30,33 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const installPrompt = ref(window.__pwaInstallPrompt || null);
 const isStandalone =
-  window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  window.matchMedia("(display-mode: standalone)").matches ||
+  window.navigator.standalone === true;
 const showInstallToast = ref(false);
 const toastTimer = ref(null);
+
+// ── Keep-alive Render (évite le spin down après inactivité) ─────────────
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || "https://pharmamap-j9aa.onrender.com/api";
+let keepAliveInterval = null;
+
+const pingBackend = () => {
+  fetch(`${BACKEND_URL}/pharmacies/`, { method: "GET", mode: "no-cors" }).catch(() => {});
+};
+
+const startKeepAlive = () => {
+  // Premier ping immédiat
+  pingBackend();
+  // Ensuite toutes les 14 minutes (Render spin down = 15 min d'inactivité)
+  keepAliveInterval = setInterval(pingBackend, 14 * 60 * 1000);
+};
+
+const stopKeepAlive = () => {
+  if (keepAliveInterval) {
+    clearInterval(keepAliveInterval);
+    keepAliveInterval = null;
+  }
+};
+// ────────────────────────────────────────────────────────────────────────
 
 const canInstall = () => Boolean(installPrompt.value);
 
@@ -86,19 +110,24 @@ const onAppInstalled = () => {
   installPrompt.value = null;
   window.__pwaInstallPrompt = null;
   showInstallToast.value = false;
-  localStorage.setItem(hideUntilKey, String(Date.now() + 365 * 24 * 60 * 60 * 1000));
+  localStorage.setItem(
+    hideUntilKey,
+    String(Date.now() + 365 * 24 * 60 * 60 * 1000)
+  );
 };
 
 onMounted(() => {
   window.addEventListener("beforeinstallprompt", onBeforeInstallPrompt);
   window.addEventListener("appinstalled", onAppInstalled);
   scheduleToast();
+  startKeepAlive();
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("beforeinstallprompt", onBeforeInstallPrompt);
   window.removeEventListener("appinstalled", onAppInstalled);
   if (toastTimer.value) clearTimeout(toastTimer.value);
+  stopKeepAlive();
 });
 </script>
 

@@ -547,11 +547,17 @@ const initMapbox = () => {
   map.dragRotate.disable();
   map.touchZoomRotate.disableRotation();
 
+  // Force resize après que le DOM soit stable
   map.on("load", async () => {
     ensureRouteLayer();
     await ensurePharmacyLayers();
     updateUserMarker();
     updateRoute();
+    
+    // ← ajoute ces lignes
+    setTimeout(() => {
+      map.resize();
+    }, 100);
   });
 };
 
@@ -583,10 +589,13 @@ const locateUser = () => {
 };
 
 // ---- Lifecycle --------------------------------------------------------
-onMounted(() => { 
+onMounted(() => {
   initMapbox();
-  window.addEventListener('resize', () => {
+  
+  // ← remplace ton addEventListener resize par ça
+  window.addEventListener("resize", () => {
     isMobile.value = window.innerWidth < 768;
+    map?.resize();
   });
 });
 

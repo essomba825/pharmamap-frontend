@@ -280,6 +280,8 @@ onMounted(async () => {
 }
 .map-panel__body {
   padding: 10px;
+  height: 950px; 
+
 }
 
 .map-panel :deep(.carte-pharma-wrapper) {

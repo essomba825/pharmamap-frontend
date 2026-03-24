@@ -75,11 +75,10 @@ const MEDICINE_IMAGES = [
   },
   {
     id: "boites",
-    // Photo réelle : boîtes de médicaments en pharmacie
-    src: "https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&q=80&auto=format&fit=crop",
-    alt: "Rayon de pharmacie avec boîtes",
-    caption: "Livraison rapide à domicile",
-    category: "Service"
+    src: "https://images.unsplash.com/photo-1576602976047-174e57a47881?w=400&q=80&auto=format&fit=crop",
+    alt: "Médicaments et pilules",
+    caption: "Trouvez vos médicaments en un clic",
+    category: "Recherche"
   }
 ];
 
